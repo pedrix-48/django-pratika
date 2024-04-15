@@ -1,0 +1,115 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+
+    {% if title %}
+        <title>Django Blog - {{ title }}</title>
+    {% else %}
+        <title>Django Blog</title>
+    {% endif %}
+</head>
+<style>
+    .navbar-nav .nav-item .nav-link 
+    {
+        position: relative;
+    }
+    .navbar-nav .nav-item .nav-link:hover::after 
+    {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: -2px;
+        width: 100%;
+        border-bottom: 2px solid #00008B;
+    }
+    .btn-link.nav-link.text-white {
+    position: relative;
+    text-decoration: none; /* Remove default underline */
+}
+
+    .btn-link.nav-link.text-white:hover::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 100%;
+    border-bottom: 2px solid #00008B
+}
+</style>
+<body>
+    <nav class="navbar navbar-expand-lg bg-primary ">
+        <div class="container-fluid">
+            <h2 class="navbar-brand text-white">Django Blog</h2>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end me-5" id="navbarNavDropdown ">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active text-white" aria-current="page" href="{% url 'blog-home' %}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        {% if user.is_authenticated %}
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="{% url 'profile' %}">Profile</a>
+                        </li>
+                            <form action="{% url 'logout' %}" method="post">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-link nav-link text-white">Logout</button>
+                            </form>
+                        {% else %}
+                            <a class="nav-link text-white" href="{% url 'login' %}">Login</a>
+                        {% endif %}
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="{% url 'register' %}">Register</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="{% url 'blog-about' %}">About</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <br>
+    <main role="main" class="container">
+        <div class="row">
+            <div class="col-md-8">
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-{{ messages.tags }}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+                {% block content %} {% endblock %}
+            </div>
+            <div class="col-md-4">
+                <div class="content-section">
+                    <h3>Our Side Bar</h3>
+                    <p class="text-muted">You Can Put any Information Here you'd like
+                        <ul class="list-group">
+                            <li class="list-group-item list-group-item-light">Latest Post</li>
+                            <li class="list-group-item list-group-item-light">Announcements</li>
+                            <li class="list-group-item list-group-item-light">Calendars</li>
+                            <li class="list-group-item list-group-item-light">etc</li>
+                        </ul>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </main>
+    <div class="container">
+            
+    </div>
+
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+</body>
+</html>
