@@ -1,0 +1,23 @@
+NEE ATU KRIA DATABASE BA PROFILE USER
+
+>>> from django.contrib.auth.models import User
+>>> user = User.objects.filter(username='jessuabelo').first()
+>>> user
+<User: jessuabelo>
+>>> user.profile
+<Profile: jessuabelo Profile>
+>>> user.profile.image
+<ImageFieldFile: profile-pics/database_NoobZK7.jpg>
+>>> user.profile.width
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+AttributeError: 'Profile' object has no attribute 'width'
+>>> user.profile.image.width
+1046
+>>> user.profile.image.url
+'/profile-pics/database_NoobZK7.jpg'
+>>> user2 = User.objects.filter(username='newuser2').first()
+>>> user.profile.image.url
+'/profile-pics/database_NoobZK7.jpg'
+>>> user2.profile.image.url
+'/default.jpg'
