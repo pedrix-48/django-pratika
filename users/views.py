@@ -22,5 +22,5 @@ def profile(request):
 
 def user_logout(request):
     logout(request)
-    return redirect('blog-home')
+    return redirect('login')
 
