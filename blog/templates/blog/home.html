@@ -1,15 +1,16 @@
-{% extends "blog/base.html" %}
-    {% block content %}
-        {% for post in posts %}
-        <br>
-            <div class="card shadow p-3 mb-5 bg-body rounded position-relative  w-75 p-3" style="background-color: #ffffff;" style="width: 18rem;">
-                <div class="card-body">
-                    <h5 class="card-title"><a href="#">{{ post.author }}</a></h5>
-                    <h6 class="card-subtitle mb-2 text-muted">{{ post.title }}</h6>
-                    <p class="card-text">{{ post.content }}</p>
-                    <hr>
-                    <small class="text-muted">{{ post.date_post| date:"F d, Y" }}</small>
-                </div>
-            </div>
-        {% endfor %}
-    {% endblock content %}
+{% extends "blog/base.html" %} {% block content %} {% for post in posts %}
+<br />
+<div
+  class="card shadow p-3 mb-5 bg-body rounded position-relative  w-75 p-3"
+  style="background-color: #ffffff;"
+  style="width: 18rem;"
+>
+  <div class="card-body">
+    <h5 class="card-title"><a href="#">{{ post.author }}</a></h5>
+    <h6 class="card-subtitle mb-2 text-muted">{{ post.title }}</h6>
+    <p class="card-text">{{ post.content }}</p>
+    <hr />
+    <small class="text-muted">{{ post.date_post| date:"F d, Y" }}</small>
+  </div>
+</div>
+{% endfor %} {% endblock content %}
